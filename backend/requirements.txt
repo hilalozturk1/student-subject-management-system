@@ -5,3 +5,4 @@ psycopg2-binary==2.9.9
 python-dotenv==1.0.1
 djangorestframework-simplejwt==5.3.1
 djoser==2.2.0
+whitenoise==6.6.0 
