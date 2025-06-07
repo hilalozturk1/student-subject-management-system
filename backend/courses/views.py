@@ -5,7 +5,7 @@ from .serializers import CourseSerializer
 from users.permissions import IsAdminUser
 
 class CourseViewSet(viewsets.ModelViewSet):
-    queryset = Course.objects.all()
+    queryset = Course.objects.all().order_by('id')
     serializer_class = CourseSerializer
 
     def get_permissions(self):

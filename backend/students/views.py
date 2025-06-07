@@ -7,7 +7,7 @@ from users.permissions import IsAdminUser, IsOwnerOrAdmin
 from django.shortcuts import get_object_or_404
 
 class StudentViewSet(viewsets.ModelViewSet):
-    queryset = Student.objects.all()
+    queryset = Student.objects.all().order_by('id')
     serializer_class = StudentSerializer
 
     def get_permissions(self):

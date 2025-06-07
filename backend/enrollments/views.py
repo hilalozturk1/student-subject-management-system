@@ -7,7 +7,7 @@ from users.permissions import IsAdminUser, IsStudentUser
 from students.models import Student
 
 class EnrollmentViewSet(viewsets.ModelViewSet):
-    queryset = Enrollment.objects.all()
+    queryset = Enrollment.objects.all().order_by('id')
     serializer_class = EnrollmentSerializer
 
     def get_permissions(self):
