@@ -24,6 +24,7 @@ export default function RegisterPage() {
       username: "",
       email: "",
       password: "",
+      is_staff:false
     },
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
