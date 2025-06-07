@@ -25,6 +25,8 @@ services:
           sh -c "./wait-for-it.sh db 5432 --timeout=60 --
                  python manage.py migrate &&
                  python manage.py createadmin &&
+                 python manage.py createstudents &&
+                 python manage.py createcourses &&
                  python manage.py createsuperuser --noinput || true &&
                  gunicorn student_management.wsgi:application --bind 0.0.0.0:8000 --reload"
     volumes:
