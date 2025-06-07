@@ -31,7 +31,7 @@ export default function DashboardLayout({
       <header className="bg-blue-600 text-white p-4 shadow-md flex justify-between items-center">
         <h1 className="text-xl font-bold">Student & Course Management</h1>
         <nav className="flex items-center space-x-4">
-          {user?.is_staff && (// Link for only admin role
+          {is_staff && (// Link for only admin role
             <CustomButton type="link" href="/dashboard/students" className="text-white">
               Students
             </CustomButton>
