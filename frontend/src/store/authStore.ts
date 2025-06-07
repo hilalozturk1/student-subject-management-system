@@ -41,6 +41,7 @@ const useAuthStore = create<AuthState>((set) => ({
     
     try {
       const userDetailsResponse = await api.get(`/api/auth/users/me/`);
+
       const fullUser: User = {
         id: userDetailsResponse.data.id,
         username: userDetailsResponse.data.username,
@@ -48,6 +49,8 @@ const useAuthStore = create<AuthState>((set) => ({
         is_staff: userDetailsResponse.data.is_staff,
         groups: userDetailsResponse.data.groups,
       };
+        Cookies.set('user', fullUser.username);
+        Cookies.set('is_staff', String(fullUser.is_staff));
       set({ isAuthenticated: true, user: fullUser });
     } catch (error) {
       console.error("Could not retrieve user details:", error);

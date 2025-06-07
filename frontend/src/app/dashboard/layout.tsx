@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import useAuthStore from '@/store/authStore';
 import CustomButton from '@/components/CustomButton';
+import Cookies from 'js-cookie';
 
 export default function DashboardLayout({
   children,
@@ -19,6 +20,8 @@ export default function DashboardLayout({
     }
   }, [isAuthenticated, router]);
 
+  const userName = Cookies.get("user");
+  const is_staff = Cookies.get("is_staff")
   if (!isAuthenticated) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
@@ -39,7 +42,7 @@ export default function DashboardLayout({
           <CustomButton type="link" href="/dashboard/enrollments" className="text-white">
             Enrollments
           </CustomButton>
-          <span className="text-sm">Welcome, {user?.username} ({user?.is_staff ? 'Admin' : 'Student'})</span>
+          <span className="text-sm">Welcome, {userName} ({is_staff ? 'Admin' : 'Student'})</span>
           <CustomButton onClick={logout} className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md">
             Log out
           </CustomButton>
