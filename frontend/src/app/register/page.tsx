@@ -1,11 +1,8 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import CustomInput from "@/components/CustomInput";
-import CustomButton from "@/components/CustomButton";
 import api from "@/lib/api";
 
 const validationSchema = Yup.object().shape({
@@ -24,13 +21,13 @@ export default function RegisterPage() {
       username: "",
       email: "",
       password: "",
-      is_staff:false
+      is_staff: false
     },
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
       try {
         await api.post("/api/auth/users/", values);
-        toast.success("Register successfull, please login.");
+        toast.success("Register successful, please login.");
         router.push("/login");
       } catch (error: any) {
         toast.error(error.response?.data?.username?.[0] || error.response?.data?.email?.[0] || "Register failed.");
@@ -41,53 +38,59 @@ export default function RegisterPage() {
   });
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
         <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
         <form onSubmit={formik.handleSubmit} className="space-y-4">
           <div>
-            <CustomInput
-              id="username"
-              name="username"
-              label="User Name"
+            <label className="block mb-1 font-medium">User Name</label>
+            <input
               type="text"
+              name="username"
+              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               value={formik.values.username}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              errorValue={formik.touched.username && formik.errors.username ? formik.errors.username : ""}
             />
+            {formik.touched.username && formik.errors.username && (
+              <div className="text-red-500 text-sm mt-1">{formik.errors.username}</div>
+            )}
           </div>
           <div>
-            <CustomInput
-              id="email"
-              name="email"
-              label="E-mail"
+            <label className="block mb-1 font-medium">E-mail</label>
+            <input
               type="email"
+              name="email"
+              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              errorValue={formik.touched.email && formik.errors.email ? formik.errors.email : ""}
             />
+            {formik.touched.email && formik.errors.email && (
+              <div className="text-red-500 text-sm mt-1">{formik.errors.email}</div>
+            )}
           </div>
           <div>
-            <CustomInput
-              id="password"
-              name="password"
-              label="Password"
+            <label className="block mb-1 font-medium">Password</label>
+            <input
               type="password"
+              name="password"
+              className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              errorValue={formik.touched.password && formik.errors.password ? formik.errors.password : ""}
             />
+            {formik.touched.password && formik.errors.password && (
+              <div className="text-red-500 text-sm mt-1">{formik.errors.password}</div>
+            )}
           </div>
-          <CustomButton
+          <button
             type="submit"
-            loading={formik.isSubmitting}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md"
+            disabled={formik.isSubmitting}
+            className="w-full py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-semibold transition"
           >
             Register
-          </CustomButton>
+          </button>
         </form>
         <p className="mt-4 text-center text-sm text-gray-600">
           Do you already have an account?{" "}

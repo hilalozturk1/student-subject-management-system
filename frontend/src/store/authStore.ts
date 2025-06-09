@@ -61,6 +61,8 @@ const useAuthStore = create<AuthState>((set) => ({
   logout: () => {
     Cookies.remove('access_token');
     Cookies.remove('refresh_token');
+    Cookies.remove('user');
+    Cookies.remove('is_staff');
     set({ isAuthenticated: false, user: null });
   },
 
