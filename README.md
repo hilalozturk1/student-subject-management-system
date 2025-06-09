@@ -62,6 +62,15 @@ docker-compose up --build
 
 ---
 
+## Running Tests
+
+To run all backend tests (students, courses, enrollments) inside Docker, use:
+
+```bash
+docker compose up test
+```
+---
+
 ## Notes
 
 - Migration files and sample data commands are included in the repo.
