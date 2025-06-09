@@ -44,7 +44,7 @@ services:
       DB_PORT: ${DB_PORT}
     depends_on:
      db:
-      condition: service_healthy # DB servisi healthcheck'i geçene kadar bekle
+      condition: service_healthy
     env_file:
       - ./.env
 
