@@ -48,6 +48,30 @@ services:
     env_file:
       - ./.env
 
+  test:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    command: >
+      sh -c "python manage.py test students &&
+              python manage.py test courses &&
+              python manage.py test enrollments"
+    volumes:
+      - ./backend:/app
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DJANGO_DEBUG: ${DJANGO_DEBUG}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: db
+      DB_PORT: ${DB_PORT}
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - ./.env
+
   frontend:
     build:
       context: ./frontend
